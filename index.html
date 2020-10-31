@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Naive background removal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0"></script>
+    </head>
+    <body>
+        <input type="file" id="inp">
+        <div id="canv+img" style="align-items: center; align-content: center;">
+        <img src = "" id="img" width="500" height="500">
+        <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        <script>
+         document.getElementById('inp').onchange = function(e)
+            {
+              var img = new Image();
+             img.onload = draw;
+             img.onerror = failed;
+              img.src = URL.createObjectURL(this.files[0]);
+             };
+        function draw()
+            {
+             var canvas = document.getElementById('canvas');
+             canvas.width = this.width;
+             canvas.height = this.height;
+             var ctx = canvas.getContext('2d');
+             ctx.drawImage(this, 0,0,500,500);
+            }
+      function failed() 
+            {
+          console.error("The provided file couldn't be loaded as an Image media");
+           }
+        </script>
+    </body>
+    <script src="bodypix.js"></script>
+</html>
